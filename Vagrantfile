@@ -29,17 +29,7 @@ Vagrant.configure(2) do |config|
     if (-not (get-command choco*)) {
       iwr https://chocolatey.org/install.ps1 | iex
     }
-    choco install puppet
-    certutil -v -addstore Root '\\\\VBOXSVR\\vagrant\\geotrustglobalca.pem'
   SHELL
 
-  config.vm.provision "shell", inline: <<-SHELL
-    puppet module install rismoney-chocolatey
-  SHELL
-
-  config.vm.provision "puppet"  do |puppet|
-    puppet.manifests_path = "."
-    puppet.manifest_file = "default.pp"
-  end
 
 end
